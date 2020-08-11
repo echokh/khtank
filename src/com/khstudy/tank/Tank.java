@@ -7,6 +7,9 @@ public class Tank {
     private Direction direction = Direction.DOWN;
     private final TankFrame tf;
 
+    private static int TANK_WIDTH=50;
+    private static int TANK_HEIGHT=50;
+
     public void setX(int x) {
         this.x = x;
     }
@@ -17,40 +20,38 @@ public class Tank {
 
     private static final int tankSpeed = 5;
 
-    public Tank(int x, int y, Direction direction,TankFrame tf) {
+    public Tank(int x, int y, Direction direction, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.direction = direction;
-        this.tf=tf;
+        this.tf = tf;
     }
 
 
     public void paint(Graphics g) {
-        g.fillRect(x, y, 50, 50);
+        g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
     }
 
     public void moveTank(boolean BL, boolean BU, boolean BR, boolean BD) {
         if (BL) {
             x -= tankSpeed;
-            this.direction=Direction.LEFT;
+            this.direction = Direction.LEFT;
         }
         if (BR) {
             x += tankSpeed;
-            this.direction=Direction.RIGHT;
+            this.direction = Direction.RIGHT;
         }
         if (BU) {
             y -= tankSpeed;
-            this.direction=Direction.UP;
+            this.direction = Direction.UP;
         }
         if (BD) {
             y += tankSpeed;
-            this.direction=Direction.DOWN;
+            this.direction = Direction.DOWN;
         }
     }
 
     public void fire() {
-        tf.bullet  = new Bullet(x, y, direction,tf);
-        tf.bullet.moveBullet();
-
+        tf.bullets.add(new Bullet(x+TANK_WIDTH/2, y+TANK_HEIGHT/2, direction, tf));
     }
 }

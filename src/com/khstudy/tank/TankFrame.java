@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TankFrame extends Frame {
 
@@ -43,7 +45,8 @@ public class TankFrame extends Frame {
     }
 
     Tank myTank = new Tank(200, 200, Direction.DOWN,this);
-    Bullet bullet=new Bullet(300,300,Direction.DOWN,this);
+    List<Bullet> bullets=new ArrayList<>();
+//    Bullet bullet=new Bullet(300,300,Direction.DOWN,this);
     /**
      * 窗口需要重新绘制的时候
      *
@@ -51,9 +54,11 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-//        super.paint(g);
         myTank.paint(g);
-        bullet.paint(g);
+        for (int i=0;i<bullets.size();i++)
+        {
+            bullets.get(i).paint(g);
+        }
     }
 
 
@@ -110,7 +115,7 @@ public class TankFrame extends Frame {
                     break;
                 }
                 case KeyEvent.VK_SPACE:{
-                    myTank.fire();
+                   myTank.fire();
                    break;
                 }
             }
