@@ -25,22 +25,26 @@ public class Bullet {
         if (!live) {
             tf.bullets.remove(this);
         }
-        g.setColor(Color.red);
         switch (dir) {
             case DOWN:
                 y += SPEED;
+                g.drawImage(ResourceMgr.bulletD, x, y, null);
                 break;
             case UP:
                 y -= SPEED;
+                g.drawImage(ResourceMgr.bulletU, x, y, null);
                 break;
             case LEFT:
                 x -= SPEED;
+                g.drawImage(ResourceMgr.bulletL, x, y, null);
                 break;
             case RIGHT:
+                g.drawImage(ResourceMgr.bulletR, x, y, null);
                 x += SPEED;
                 break;
         }
-        g.fillRect(x, y, BULLET_WIDTH, BULLET_HEIGHT);
+//        g.fillRect(x, y, BULLET_WIDTH, BULLET_HEIGHT);
+
         if (x < 0 || y < 0 || x > TankFrame.WINDOW_WIDTH || y > TankFrame.WINDOW_HEIGHT) {
             live = false;
         }

@@ -31,13 +31,12 @@ public class TankFrame extends Frame {
 
     @Override
     public void update(Graphics g) {
-        super.update(g);
         if (offScreenImage == null) {
             offScreenImage = this.createImage(WINDOW_WIDTH, WINDOW_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
-        gOffScreen.setColor(Color.white);
+        gOffScreen.setColor(Color.black);
         gOffScreen.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         gOffScreen.setColor(c);
         paint(gOffScreen);
@@ -46,7 +45,6 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Direction.DOWN, this);
     List<Bullet> bullets = new ArrayList<>();
-//    Bullet bullet=new Bullet(300,300,Direction.DOWN,this);
 
     /**
      * 窗口需要重新绘制的时候

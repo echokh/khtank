@@ -29,8 +29,24 @@ public class Tank {
 
 
     public void paint(Graphics g) {
-        g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
+        switch (direction){
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR, x, y, null);
+                break;
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD, x, y, null);
+                break;
+        }
+
     }
+
+
 
     public void moveTank(boolean BL, boolean BU, boolean BR, boolean BD) {
         if (BL) {
@@ -52,6 +68,6 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullets.add(new Bullet(x + TANK_WIDTH / 2, y + TANK_HEIGHT / 2, direction, tf));
+        tf.bullets.add(new Bullet(x + TANK_WIDTH / 5*2, y + TANK_HEIGHT / 2, direction, tf));
     }
 }
