@@ -10,8 +10,8 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 
-    public static final int WINDOW_WIDTH=800;
-    public static final int WINDOW_HEIGHT=600;
+    public static final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_HEIGHT = 600;
 
     public TankFrame() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -27,26 +27,27 @@ public class TankFrame extends Frame {
         this.addKeyListener(new MyKeyListener());
     }
 
-    Image offScreenImage=null;
+    Image offScreenImage = null;
 
     @Override
     public void update(Graphics g) {
         super.update(g);
-        if(offScreenImage==null){
-            offScreenImage=this.createImage(WINDOW_WIDTH,WINDOW_HEIGHT);
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(WINDOW_WIDTH, WINDOW_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.white);
-        gOffScreen.fillRect(0,0,WINDOW_WIDTH,WINDOW_HEIGHT);
+        gOffScreen.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         gOffScreen.setColor(c);
         paint(gOffScreen);
-        g.drawImage(offScreenImage,0,0,null);
+        g.drawImage(offScreenImage, 0, 0, null);
     }
 
-    Tank myTank = new Tank(200, 200, Direction.DOWN,this);
-    List<Bullet> bullets=new ArrayList<>();
+    Tank myTank = new Tank(200, 200, Direction.DOWN, this);
+    List<Bullet> bullets = new ArrayList<>();
 //    Bullet bullet=new Bullet(300,300,Direction.DOWN,this);
+
     /**
      * 窗口需要重新绘制的时候
      *
@@ -55,8 +56,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         myTank.paint(g);
-        for (int i=0;i<bullets.size();i++)
-        {
+        for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }
     }
@@ -65,7 +65,7 @@ public class TankFrame extends Frame {
     class MyKeyListener extends KeyAdapter {
 
         boolean BL = false, BU = false, BR = false, BD = false;
-        boolean bulletMove=false;
+        boolean bulletMove = false;
 
         @Override
         public void keyPressed(KeyEvent e) {
@@ -114,9 +114,9 @@ public class TankFrame extends Frame {
                     BR = false;
                     break;
                 }
-                case KeyEvent.VK_SPACE:{
-                   myTank.fire();
-                   break;
+                case KeyEvent.VK_SPACE: {
+                    myTank.fire();
+                    break;
                 }
             }
         }

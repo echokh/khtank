@@ -7,8 +7,8 @@ public class Tank {
     private Direction direction = Direction.DOWN;
     private final TankFrame tf;
 
-    private static int TANK_WIDTH=50;
-    private static int TANK_HEIGHT=50;
+    private static int TANK_WIDTH = 50;
+    private static int TANK_HEIGHT = 50;
 
     public void setX(int x) {
         this.x = x;
@@ -52,6 +52,6 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullets.add(new Bullet(x+TANK_WIDTH/2, y+TANK_HEIGHT/2, direction, tf));
+        tf.bullets.add(new Bullet(x + TANK_WIDTH / 2, y + TANK_HEIGHT / 2, direction, tf));
     }
 }

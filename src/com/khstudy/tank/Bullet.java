@@ -8,8 +8,8 @@ public class Bullet {
     private Direction dir;
     private final TankFrame tf;
 
-    private static final int BULLET_WIDTH=5;
-    private static final int BULLET_HEIGHT=5;
+    private static final int BULLET_WIDTH = 5;
+    private static final int BULLET_HEIGHT = 5;
 
     private boolean live = true;
 
@@ -22,8 +22,7 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
-        if (!live)
-        {
+        if (!live) {
             tf.bullets.remove(this);
         }
         g.setColor(Color.red);
@@ -42,9 +41,8 @@ public class Bullet {
                 break;
         }
         g.fillRect(x, y, BULLET_WIDTH, BULLET_HEIGHT);
-        if(x<0||y<0||x>TankFrame.WINDOW_WIDTH||y>TankFrame.WINDOW_HEIGHT)
-        {
-            live=false;
+        if (x < 0 || y < 0 || x > TankFrame.WINDOW_WIDTH || y > TankFrame.WINDOW_HEIGHT) {
+            live = false;
         }
     }
 }
