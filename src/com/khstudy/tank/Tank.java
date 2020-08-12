@@ -11,6 +11,8 @@ public class Tank {
     public static int TANK_WIDTH = 50;
     public static int TANK_HEIGHT = 50;
 
+    private Rectangle rect=new Rectangle();
+
     public int getX() {
         return x;
     }
@@ -34,6 +36,11 @@ public class Tank {
         if (group == Group.BAD) {
             this.moving = true;
         }
+
+        rect.x=x;
+        rect.y=y;
+        rect.width=TANK_WIDTH;
+        rect.height=TANK_HEIGHT;
     }
 
     public void setDirection(Direction direction) {
@@ -42,6 +49,10 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public Rectangle getRect() {
+        return rect;
     }
 
     public void paint(Graphics g) {
@@ -90,6 +101,8 @@ public class Tank {
             switchDir();
         }
         boundCheck();
+        rect.x=this.x;
+        rect.y=this.y;
     }
 
     private void boundCheck() {
@@ -100,17 +113,17 @@ public class Tank {
     }
 
     public void switchDir() {
-        switch (random.nextInt(500)) {
+        switch (random.nextInt(250)) {
             case 0:
                 this.direction = Direction.UP;
                 break;
-            case 100:
+            case 50:
                 this.direction = Direction.DOWN;
                 break;
-            case 200:
+            case 150:
                 this.direction = Direction.LEFT;
                 break;
-            case 300:
+            case 200:
                 this.direction = Direction.RIGHT;
                 break;
         }
