@@ -10,15 +10,17 @@ public class Bullet {
 
     private static final int BULLET_WIDTH = 5;
     private static final int BULLET_HEIGHT = 5;
+    private Group group;
 
     private boolean live = true;
 
 
-    public Bullet(int x, int y, Direction dir, TankFrame tf) {
+    public Bullet(int x, int y, Direction dir, TankFrame tf, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -43,10 +45,24 @@ public class Bullet {
                 x += SPEED;
                 break;
         }
-//        g.fillRect(x, y, BULLET_WIDTH, BULLET_HEIGHT);
 
         if (x < 0 || y < 0 || x > TankFrame.WINDOW_WIDTH || y > TankFrame.WINDOW_HEIGHT) {
             live = false;
         }
+    }
+
+    public void collodeWith(Tank tank) {
+        if (this.group == tank.getGroup()) return;
+        Rectangle rect = new Rectangle(this.x, this.y, BULLET_WIDTH, BULLET_HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.TANK_WIDTH, Tank.TANK_HEIGHT);
+        if (rect.intersects(rect2)) {
+            tank.die();
+            this.die();
+            tf.exploders.add(new Explode(tank.getX(), tank.getY(), tf));
+        }
+    }
+
+    private void die() {
+        this.live = false;
     }
 }
