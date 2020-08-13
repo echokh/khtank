@@ -4,7 +4,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         TankFrame frame = new TankFrame();
 
-        for (int i = 0; i < 5; i++) {
+        int initTankCount= Integer.parseInt(PropertyMgr.get("initTankCount").toString());
+
+        for (int i = 0; i < initTankCount; i++) {
             frame.enemies.add(new Tank(50 + i * 60, 200, Direction.DOWN, frame,Group.BAD));
         }
 
