@@ -18,6 +18,6 @@ public class DefaultFire implements FireStrategy {
 
     @Override
     public void fire(Tank t) {
-        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, t.getDirection(), t.tf, t.group);
+        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, t.getDirection(), t.gm, t.group);
     }
 }

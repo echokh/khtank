@@ -10,7 +10,6 @@ import java.util.Random;
 public class Tank  extends BaseTank {
     private int x, y;
     private Direction direction = Direction.DOWN;
-    public final TankFrame tf;
 
     public static int TANK_WIDTH = 50;
     public static int TANK_HEIGHT = 50;
@@ -35,13 +34,14 @@ public class Tank  extends BaseTank {
     private boolean moving = false;
     public Group group = Group.BAD;
 
+    public GameModel gm;
 
     private Random random = new Random();
 
-    public Tank(int x, int y, Direction direction, TankFrame tf, Group group) {
+    public Tank(int x, int y, Direction direction, GameModel gm, Group group) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
         if (group == Group.BAD) {
             this.moving = true;
@@ -68,7 +68,7 @@ public class Tank  extends BaseTank {
     @Override
     public void paint(Graphics g) {
         if (!live) {
-            tf.enemies.remove(this);
+            gm.enemies.remove(this);
         }
         switch (direction) {
             case RIGHT:
@@ -117,9 +117,9 @@ public class Tank  extends BaseTank {
     }
 
     private void boundCheck() {
-        x = Math.min(tf.WINDOW_WIDTH - TANK_WIDTH, x);
+        x = Math.min(TankFrame.WINDOW_WIDTH - TANK_WIDTH, x);
         x = Math.max(0, x);
-        y = Math.min(tf.WINDOW_HEIGHT - TANK_HEIGHT, y);
+        y = Math.min(TankFrame.WINDOW_HEIGHT - TANK_HEIGHT, y);
         y = Math.max(TANK_HEIGHT / 2, y);
     }
 

@@ -1,13 +1,14 @@
 package com.khstudy.tank.abstractfactory;
 
 import com.khstudy.tank.Direction;
+import com.khstudy.tank.GameModel;
 import com.khstudy.tank.Group;
 import com.khstudy.tank.TankFrame;
 
 public abstract class GameFactory {
-    public abstract BaseTank createTank(int x, int y, Direction direction, TankFrame tf, Group group);
+    public abstract BaseTank createTank(int x, int y, Direction direction, GameModel gameModel, Group group);
 
-    public abstract BaseExplode createExplode(int x, int y, TankFrame tankFrame);
+    public abstract BaseExplode createExplode(int x, int y, GameModel gameModel);
 
-    public abstract BaseBullet createBullet(int x, int y, Direction direction, TankFrame tf, Group group);
+    public abstract BaseBullet createBullet(int x, int y, Direction direction,GameModel gameModel, Group group);
 }

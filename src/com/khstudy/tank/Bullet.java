@@ -1,8 +1,6 @@
 package com.khstudy.tank;
 
 import com.khstudy.tank.abstractfactory.BaseBullet;
-import com.khstudy.tank.abstractfactory.BaseTank;
-import com.khstudy.tank.abstractfactory.DefaultGameFactory;
 
 import java.awt.*;
 
@@ -10,7 +8,7 @@ public class Bullet extends BaseBullet {
     private static int SPEED = 6;
     private int x, y;
     private Direction dir;
-    private final TankFrame tf;
+    private final GameModel gameModel;
 
     private static final int BULLET_WIDTH = 5;
     private static final int BULLET_HEIGHT = 5;
@@ -20,11 +18,11 @@ public class Bullet extends BaseBullet {
 
     private Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Direction dir, TankFrame tf, Group group) {
+    public Bullet(int x, int y, Direction dir, GameModel gameModel, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gameModel = gameModel;
         this.group = group;
 
         rect.x = x;
@@ -32,12 +30,12 @@ public class Bullet extends BaseBullet {
         rect.width = BULLET_WIDTH;
         rect.height = BULLET_HEIGHT;
 
-        tf.bullets.add(this);
+        gameModel.bullets.add(this);
     }
 
     public void paint(Graphics g) {
         if (!live) {
-            tf.bullets.remove(this);
+            gameModel.bullets.remove(this);
         }
         switch (dir) {
             case DOWN:
@@ -71,9 +69,9 @@ public class Bullet extends BaseBullet {
         if (rect.intersects(tank.getRect())) {
             tank.die();
             this.die();
-//            tf.exploders.add(new Explode(tank.getX(), tank.getY(), tf));
+            gameModel.exploders.add(new Explode(tank.getX(), tank.getY(), gameModel));
             //使用抽象工厂生产
-            tf.exploders.add(tf.gameFactory.createExplode(tank.getX(), tank.getY(), tf));
+//            gameModel.exploders.add(tf.gameFactory.createExplode(tank.getX(), tank.getY(), gameModel));
         }
     }
 

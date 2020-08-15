@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Explode extends BaseExplode {
     private int x, y;
-    TankFrame tf = null;
+    GameModel gameModel = null;
 
     private boolean live = true;
 
@@ -17,10 +17,10 @@ public class Explode extends BaseExplode {
 
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y, GameModel gameModel) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gameModel = gameModel;
     }
 
     @Override

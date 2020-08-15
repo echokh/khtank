@@ -1,19 +1,12 @@
 package com.khstudy.tank;
 
-import com.khstudy.tank.abstractfactory.BaseExplode;
-import com.khstudy.tank.abstractfactory.BaseTank;
-import com.khstudy.tank.abstractfactory.DefaultGameFactory;
-import com.khstudy.tank.abstractfactory.GameFactory;
 import com.khstudy.tank.firestrategy.FourBulletFire;
-import com.sun.deploy.util.StringUtils;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TankFrame extends Frame {
 
@@ -34,6 +27,8 @@ public class TankFrame extends Frame {
         this.addKeyListener(new MyKeyListener());
     }
 
+    GameModel gameModel=new GameModel();
+
     Image offScreenImage = null;
 
     @Override
@@ -50,12 +45,9 @@ public class TankFrame extends Frame {
         g.drawImage(offScreenImage, 0, 0, null);
     }
 
-    Tank myTank = new Tank(200, 500, Direction.UP, this, Group.GOOD);
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> enemies = new ArrayList<>();
-    List<BaseExplode> exploders = new ArrayList<>();
-    GameFactory gameFactory = DefaultGameFactory.getInstance();
 
+
+//    GameFactory gameFactory = DefaultGameFactory.getInstance();
 //    GameFactory gameFactory = null;
 //
 //    //获取工厂
@@ -71,36 +63,10 @@ public class TankFrame extends Frame {
 
     /**
      * 窗口需要重新绘制的时候
-     *
-     * @param g
      */
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.white);
-        g.drawString("子弹的数量" + bullets.size(), 10, 60);
-        g.drawString("敌人的数量" + enemies.size(), 10, 80);
-        g.drawString("爆炸的数量" + exploders.size(), 10, 100);
-        g.setColor(c);
-        myTank.paint(g);
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).paint(g);
-        }
-        for (int i = 0; i < enemies.size(); i++) {
-            enemies.get(i).paint(g);
-        }
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < enemies.size(); j++) {
-                bullets.get(i).collodeWith(enemies.get(j));
-            }
-        }
-        for (int i = 0; i < exploders.size(); i++) {
-            if (exploders.get(i).isLive()) {
-                exploders.get(i).paint(g);
-            } else {
-                exploders.remove(i);
-            }
-        }
+        gameModel.paint(g);
     }
 
 
@@ -113,23 +79,23 @@ public class TankFrame extends Frame {
             int keyCode = e.getKeyCode();
             switch (keyCode) {
                 case KeyEvent.VK_LEFT: {
-                    myTank.setDirection(Direction.LEFT);
+                    gameModel.getMyTank().setDirection(Direction.LEFT);
                     break;
                 }
                 case KeyEvent.VK_UP: {
-                    myTank.setDirection(Direction.UP);
+                    gameModel.getMyTank().setDirection(Direction.UP);
                     break;
                 }
                 case KeyEvent.VK_DOWN: {
-                    myTank.setDirection(Direction.DOWN);
+                    gameModel.getMyTank().setDirection(Direction.DOWN);
                     break;
                 }
                 case KeyEvent.VK_RIGHT: {
-                    myTank.setDirection(Direction.RIGHT);
+                    gameModel.getMyTank().setDirection(Direction.RIGHT);
                     break;
                 }
             }
-            myTank.setMoving(true);
+            gameModel.getMyTank().setMoving(true);
         }
 
         @Override
@@ -153,7 +119,7 @@ public class TankFrame extends Frame {
                     break;
                 }
                 case KeyEvent.VK_SPACE: {
-                    myTank.fire(FourBulletFire.getInstance());
+                    gameModel.getMyTank().fire(FourBulletFire.getInstance());
                     break;
                 }
             }

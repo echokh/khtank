@@ -16,17 +16,17 @@ public class DefaultGameFactory extends GameFactory {
         return df;
     }
     @Override
-    public Tank createTank(int x, int y, Direction direction, TankFrame tf, Group group) {
-        return new Tank(x, y, direction, tf, group);
+    public Tank createTank(int x, int y, Direction direction, GameModel gameModel, Group group) {
+        return new Tank(x, y, direction, gameModel, group);
     }
 
     @Override
-    public Explode createExplode(int x, int y, TankFrame tankFrame) {
-        return new Explode(x, y, tankFrame);
+    public Explode createExplode(int x, int y, GameModel gameModel) {
+        return new Explode(x, y, gameModel);
     }
 
     @Override
-    public Bullet createBullet(int x, int y, Direction direction, TankFrame tf, Group group) {
-        return new Bullet(x, y, direction, tf, group);
+    public Bullet createBullet(int x, int y, Direction direction, GameModel gameModel, Group group) {
+        return new Bullet(x, y, direction, gameModel, group);
     }
 }
