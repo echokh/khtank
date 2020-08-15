@@ -1,12 +1,13 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.abstractfactory.BaseTank;
 import com.khstudy.tank.firestrategy.DefaultFire;
 import com.khstudy.tank.firestrategy.FireStrategy;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank {
+public class Tank  extends BaseTank {
     private int x, y;
     private Direction direction = Direction.DOWN;
     public final TankFrame tf;
@@ -64,6 +65,7 @@ public class Tank {
         return rect;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!live) {
             tf.enemies.remove(this);
@@ -138,6 +140,10 @@ public class Tank {
         }
     }
 
+    /**
+     * 使用策略设计模式
+     * @param f
+     */
     public void fire(FireStrategy f) {
         f.fire(this);
     }

@@ -1,13 +1,16 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.abstractfactory.BaseExplode;
+
 import java.awt.*;
 
-public class Explode {
+public class Explode extends BaseExplode {
     private int x, y;
     TankFrame tf = null;
 
-    private boolean live=true;
+    private boolean live = true;
 
+    @Override
     public boolean isLive() {
         return live;
     }
@@ -20,9 +23,10 @@ public class Explode {
         this.tf = tf;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (step >= ResourceMgr.explode.length) {
-            live=false;
+            live = false;
             return;
         }
         g.drawImage(ResourceMgr.explode[step++], x, y, null);

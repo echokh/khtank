@@ -1,7 +1,11 @@
 package com.khstudy.tank;
 
-import com.khstudy.tank.firestrategy.DefaultFire;
+import com.khstudy.tank.abstractfactory.BaseExplode;
+import com.khstudy.tank.abstractfactory.BaseTank;
+import com.khstudy.tank.abstractfactory.DefaultGameFactory;
+import com.khstudy.tank.abstractfactory.GameFactory;
 import com.khstudy.tank.firestrategy.FourBulletFire;
+import com.sun.deploy.util.StringUtils;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -49,8 +53,21 @@ public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 500, Direction.UP, this, Group.GOOD);
     List<Bullet> bullets = new ArrayList<>();
     List<Tank> enemies = new ArrayList<>();
-    List<Explode> exploders = new ArrayList<>();
+    List<BaseExplode> exploders = new ArrayList<>();
+    GameFactory gameFactory = DefaultGameFactory.getInstance();
 
+//    GameFactory gameFactory = null;
+//
+//    //获取工厂
+//    {
+//        String gfStr = PropertyMgr.get("gameFactory").toString();
+//        try {
+//            gameFactory = (DefaultGameFactory) Class.forName(gfStr).newInstance();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     /**
      * 窗口需要重新绘制的时候
@@ -59,11 +76,11 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        Color c=g.getColor();
+        Color c = g.getColor();
         g.setColor(Color.white);
-        g.drawString("子弹的数量"+bullets.size(),10,60);
-        g.drawString("敌人的数量"+enemies.size(),10,80);
-        g.drawString("爆炸的数量"+exploders.size(),10,100);
+        g.drawString("子弹的数量" + bullets.size(), 10, 60);
+        g.drawString("敌人的数量" + enemies.size(), 10, 80);
+        g.drawString("爆炸的数量" + exploders.size(), 10, 100);
         g.setColor(c);
         myTank.paint(g);
         for (int i = 0; i < bullets.size(); i++) {

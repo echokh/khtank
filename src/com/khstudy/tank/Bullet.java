@@ -1,8 +1,12 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.abstractfactory.BaseBullet;
+import com.khstudy.tank.abstractfactory.BaseTank;
+import com.khstudy.tank.abstractfactory.DefaultGameFactory;
+
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends BaseBullet {
     private static int SPEED = 6;
     private int x, y;
     private Direction dir;
@@ -14,7 +18,7 @@ public class Bullet {
 
     private boolean live = true;
 
-    private Rectangle rect=new Rectangle();
+    private Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, Direction dir, TankFrame tf, Group group) {
         this.x = x;
@@ -23,10 +27,10 @@ public class Bullet {
         this.tf = tf;
         this.group = group;
 
-        rect.x=x;
-        rect.y=y;
-        rect.width=BULLET_WIDTH;
-        rect.height=BULLET_HEIGHT;
+        rect.x = x;
+        rect.y = y;
+        rect.width = BULLET_WIDTH;
+        rect.height = BULLET_HEIGHT;
 
         tf.bullets.add(this);
     }
@@ -54,8 +58,8 @@ public class Bullet {
                 break;
         }
 
-        rect.x=this.x;
-        rect.y=this.y;
+        rect.x = this.x;
+        rect.y = this.y;
 
         if (x < 0 || y < 0 || x > TankFrame.WINDOW_WIDTH || y > TankFrame.WINDOW_HEIGHT) {
             live = false;
@@ -64,11 +68,12 @@ public class Bullet {
 
     public void collodeWith(Tank tank) {
         if (this.group == tank.getGroup()) return;
-        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.TANK_WIDTH, Tank.TANK_HEIGHT);
         if (rect.intersects(tank.getRect())) {
             tank.die();
             this.die();
-            tf.exploders.add(new Explode(tank.getX(), tank.getY(), tf));
+//            tf.exploders.add(new Explode(tank.getX(), tank.getY(), tf));
+            //使用抽象工厂生产
+            tf.exploders.add(tf.gameFactory.createExplode(tank.getX(), tank.getY(), tf));
         }
     }
 
