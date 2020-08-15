@@ -4,6 +4,15 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 public class ResourceMgr {
+    private ResourceMgr() {
+    }
+
+    private static final ResourceMgr INSTANCE = new ResourceMgr();
+
+    public static ResourceMgr getInstance() {
+        return INSTANCE;
+    }
+
     public static BufferedImage tankL, tankU, tankR, tankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
     public static BufferedImage[] explode = new BufferedImage[16];

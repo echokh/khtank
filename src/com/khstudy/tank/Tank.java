@@ -1,17 +1,20 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.firestrategy.DefaultFire;
+import com.khstudy.tank.firestrategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
 public class Tank {
     private int x, y;
     private Direction direction = Direction.DOWN;
-    private final TankFrame tf;
+    public final TankFrame tf;
 
     public static int TANK_WIDTH = 50;
     public static int TANK_HEIGHT = 50;
 
-    private Rectangle rect=new Rectangle();
+    private Rectangle rect = new Rectangle();
 
     public int getX() {
         return x;
@@ -21,10 +24,16 @@ public class Tank {
         return y;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+
     private static final int tankSpeed = 2;
     private boolean live = true;
     private boolean moving = false;
-    private Group group = Group.BAD;
+    public Group group = Group.BAD;
+
 
     private Random random = new Random();
 
@@ -37,10 +46,10 @@ public class Tank {
             this.moving = true;
         }
 
-        rect.x=x;
-        rect.y=y;
-        rect.width=TANK_WIDTH;
-        rect.height=TANK_HEIGHT;
+        rect.x = x;
+        rect.y = y;
+        rect.width = TANK_WIDTH;
+        rect.height = TANK_HEIGHT;
     }
 
     public void setDirection(Direction direction) {
@@ -97,12 +106,12 @@ public class Tank {
                 break;
         }
         if (this.group == Group.BAD) {
-            if (random.nextInt(150) == 8) this.fire();
+            if (random.nextInt(150) == 8) this.fire(DefaultFire.getInstance());
             switchDir();
         }
         boundCheck();
-        rect.x=this.x;
-        rect.y=this.y;
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     private void boundCheck() {
@@ -129,8 +138,8 @@ public class Tank {
         }
     }
 
-    public void fire() {
-        tf.bullets.add(new Bullet(x + TANK_WIDTH / 5 * 2, y + TANK_HEIGHT / 2, direction, tf, this.group));
+    public void fire(FireStrategy f) {
+        f.fire(this);
     }
 
     public void die() {

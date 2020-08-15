@@ -1,5 +1,8 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.firestrategy.DefaultFire;
+import com.khstudy.tank.firestrategy.FourBulletFire;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -133,7 +136,7 @@ public class TankFrame extends Frame {
                     break;
                 }
                 case KeyEvent.VK_SPACE: {
-                    myTank.fire();
+                    myTank.fire(FourBulletFire.getInstance());
                     break;
                 }
             }

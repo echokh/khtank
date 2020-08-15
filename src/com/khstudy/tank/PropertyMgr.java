@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertyMgr {
-    static Properties pros = new Properties();
+
+    private PropertyMgr() {
+    }
+
+    private static Properties pros = new Properties();
 
     static {
         try {
@@ -17,9 +21,5 @@ public class PropertyMgr {
     public static Object get(String key) {
         if (pros == null) return null;
         return pros.get(key);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(PropertyMgr.get("initTankCount"));
     }
 }
