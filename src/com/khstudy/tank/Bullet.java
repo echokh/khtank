@@ -1,10 +1,12 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.Facade.GameModel;
 import com.khstudy.tank.abstractfactory.BaseBullet;
+import com.khstudy.tank.mediator.GameObject;
 
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
+public class Bullet extends GameObject {
     private static int SPEED = 6;
     private int x, y;
     private Direction dir;
@@ -30,12 +32,12 @@ public class Bullet extends BaseBullet {
         rect.width = BULLET_WIDTH;
         rect.height = BULLET_HEIGHT;
 
-        gameModel.bullets.add(this);
+        gameModel.add(this);
     }
 
     public void paint(Graphics g) {
         if (!live) {
-            gameModel.bullets.remove(this);
+            gameModel.remove(this);
         }
         switch (dir) {
             case DOWN:
@@ -64,15 +66,17 @@ public class Bullet extends BaseBullet {
         }
     }
 
-    public void collodeWith(Tank tank) {
-        if (this.group == tank.getGroup()) return;
+    public boolean collodeWith(Tank tank) {
+        if (this.group == tank.getGroup()) return false;
         if (rect.intersects(tank.getRect())) {
             tank.die();
             this.die();
-            gameModel.exploders.add(new Explode(tank.getX(), tank.getY(), gameModel));
+            gameModel.add(new Explode(tank.getX(), tank.getY(), gameModel));
+            return true;
             //使用抽象工厂生产
 //            gameModel.exploders.add(tf.gameFactory.createExplode(tank.getX(), tank.getY(), gameModel));
         }
+        return false;
     }
 
     private void die() {

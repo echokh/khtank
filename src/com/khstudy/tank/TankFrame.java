@@ -1,5 +1,8 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.Facade.GameModel;
+import com.khstudy.tank.abstractfactory.DefaultGameFactory;
+import com.khstudy.tank.abstractfactory.GameFactory;
 import com.khstudy.tank.firestrategy.FourBulletFire;
 
 import java.awt.*;
@@ -52,9 +55,9 @@ public class TankFrame extends Frame {
 //
 //    //获取工厂
 //    {
-//        String gfStr = PropertyMgr.get("gameFactory").toString();
+//        String gfStr =(String) PropertyMgr.get("gameFactory");
 //        try {
-//            gameFactory = (DefaultGameFactory) Class.forName(gfStr).newInstance();
+//            gameFactory = (DefaultGameFactory) Class.forName(gfStr).getDeclaredConstructor().newInstance();
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }

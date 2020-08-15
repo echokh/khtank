@@ -1,13 +1,15 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.Facade.GameModel;
 import com.khstudy.tank.abstractfactory.BaseTank;
 import com.khstudy.tank.firestrategy.DefaultFire;
 import com.khstudy.tank.firestrategy.FireStrategy;
+import com.khstudy.tank.mediator.GameObject;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank  extends BaseTank {
+public class Tank extends GameObject {
     private int x, y;
     private Direction direction = Direction.DOWN;
 
@@ -68,7 +70,7 @@ public class Tank  extends BaseTank {
     @Override
     public void paint(Graphics g) {
         if (!live) {
-            gm.enemies.remove(this);
+            gm.remove(this);
         }
         switch (direction) {
             case RIGHT:
@@ -91,7 +93,29 @@ public class Tank  extends BaseTank {
         return group;
     }
 
+    private int prevX, prevY;
+
+    public void setX(int x) {
+        this.x = x;
+        this.rect.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+        this.rect.y = y;
+    }
+
+    public int getPrevX() {
+        return prevX;
+    }
+
+    public int getPrevY() {
+        return prevY;
+    }
+
     public void moveTank() {
+        prevX = x;
+        prevY = y;
         if (!moving) return;
         switch (direction) {
             case RIGHT:
@@ -142,6 +166,7 @@ public class Tank  extends BaseTank {
 
     /**
      * 使用策略设计模式
+     *
      * @param f
      */
     public void fire(FireStrategy f) {

@@ -1,16 +1,17 @@
 package com.khstudy.tank;
 
+import com.khstudy.tank.Facade.GameModel;
 import com.khstudy.tank.abstractfactory.BaseExplode;
+import com.khstudy.tank.mediator.GameObject;
 
 import java.awt.*;
 
-public class Explode extends BaseExplode {
+public class Explode extends GameObject {
     private int x, y;
     GameModel gameModel = null;
 
     private boolean live = true;
 
-    @Override
     public boolean isLive() {
         return live;
     }
