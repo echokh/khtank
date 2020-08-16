@@ -16,9 +16,9 @@ public class FourBulletFire implements FireStrategy {
 
     @Override
     public void fire(Tank t) {
-        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.UP, t.gm, t.group);
-        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.DOWN, t.gm, t.group);
-        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.LEFT, t.gm, t.group);
-        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.RIGHT, t.gm, t.group);
+        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.UP, t.group);
+        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.DOWN, t.group);
+        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.LEFT, t.group);
+        new Bullet(t.getX() + Tank.TANK_WIDTH / 5 * 2, t.getY() + Tank.TANK_HEIGHT / 2, Direction.RIGHT, t.group);
     }
 }

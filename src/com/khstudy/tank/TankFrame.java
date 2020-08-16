@@ -30,7 +30,7 @@ public class TankFrame extends Frame {
         this.addKeyListener(new MyKeyListener());
     }
 
-    GameModel gameModel=new GameModel();
+    GameModel gameModel = GameModel.getInstance();
 
     Image offScreenImage = null;
 
@@ -47,7 +47,6 @@ public class TankFrame extends Frame {
         paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
     }
-
 
 
 //    GameFactory gameFactory = DefaultGameFactory.getInstance();

@@ -1,7 +1,6 @@
 package com.khstudy.tank;
 
 import com.khstudy.tank.Facade.GameModel;
-import com.khstudy.tank.abstractfactory.BaseBullet;
 import com.khstudy.tank.mediator.GameObject;
 
 import java.awt.*;
@@ -10,7 +9,7 @@ public class Bullet extends GameObject {
     private static int SPEED = 6;
     private int x, y;
     private Direction dir;
-    private final GameModel gameModel;
+    private final GameModel gameModel = GameModel.getInstance();
 
     private static final int BULLET_WIDTH = 5;
     private static final int BULLET_HEIGHT = 5;
@@ -20,11 +19,14 @@ public class Bullet extends GameObject {
 
     private Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Direction dir, GameModel gameModel, Group group) {
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public Bullet(int x, int y, Direction dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gameModel = gameModel;
         this.group = group;
 
         rect.x = x;
@@ -66,12 +68,12 @@ public class Bullet extends GameObject {
         }
     }
 
-    public boolean collodeWith(Tank tank) {
+    public boolean collideWith(Tank tank) {
         if (this.group == tank.getGroup()) return false;
         if (rect.intersects(tank.getRect())) {
             tank.die();
             this.die();
-            gameModel.add(new Explode(tank.getX(), tank.getY(), gameModel));
+            gameModel.add(new Explode(tank.getX(), tank.getY()));
             return true;
             //使用抽象工厂生产
 //            gameModel.exploders.add(tf.gameFactory.createExplode(tank.getX(), tank.getY(), gameModel));
@@ -79,7 +81,7 @@ public class Bullet extends GameObject {
         return false;
     }
 
-    private void die() {
+    public void die() {
         this.live = false;
     }
 }

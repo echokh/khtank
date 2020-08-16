@@ -1,7 +1,6 @@
 package com.khstudy.tank;
 
 import com.khstudy.tank.Facade.GameModel;
-import com.khstudy.tank.abstractfactory.BaseTank;
 import com.khstudy.tank.firestrategy.DefaultFire;
 import com.khstudy.tank.firestrategy.FireStrategy;
 import com.khstudy.tank.mediator.GameObject;
@@ -36,14 +35,11 @@ public class Tank extends GameObject {
     private boolean moving = false;
     public Group group = Group.BAD;
 
-    public GameModel gm;
-
     private Random random = new Random();
 
-    public Tank(int x, int y, Direction direction, GameModel gm, Group group) {
+    public Tank(int x, int y, Direction direction, Group group) {
         this.x = x;
         this.y = y;
-        this.gm = gm;
         this.group = group;
         if (group == Group.BAD) {
             this.moving = true;
@@ -70,7 +66,7 @@ public class Tank extends GameObject {
     @Override
     public void paint(Graphics g) {
         if (!live) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (direction) {
             case RIGHT:
